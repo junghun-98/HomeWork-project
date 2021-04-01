@@ -12,15 +12,15 @@ vector<vector<int>> Createtower(int disk_num)
 
     return Tower;
 }
-int Allowmove(int from, int to, int size, vector<vector<int>> Tower) //ÀÌµ¿ ¿©ºÎ ÆÇÁ¤ ÇÔ¼ö
+int Allowmove(int from, int to, int size, vector<vector<int>> Tower) //ì´ë™ ì—¬ë¶€ íŒì • í•¨ìˆ˜
 {
-    if (from < 1 || to < 1 || from > size || to > size) return 0;    //Å¾ÀÌ Á¸ÀçÇÏÁö ¾ÊÀ½
+    if (from < 1 || to < 1 || from > size || to > size) return 0;    //íƒ‘ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŒ
 
-    else if (from == to) return 0;                                   //¿Å±â´Â Å¾°ú ¿Å±â·Á´Â Å¾ÀÌ °°À½
+    else if (from == to) return 0;                                   //ì˜®ê¸°ëŠ” íƒ‘ê³¼ ì˜®ê¸°ë ¤ëŠ” íƒ‘ì´ ê°™ìŒ
 
-    else if (Tower[from - 1].size() == 0) return 0;                  //¿Å±â·Á´Â Å¾¿¡ µğ½ºÅ©°¡ ¾øÀ½
+    else if (Tower[from - 1].size() == 0) return 0;                  //ì˜®ê¸°ë ¤ëŠ” íƒ‘ì— ë””ìŠ¤í¬ê°€ ì—†ìŒ
 
-    else if (Tower[to - 1].size() > 0                                //Å« µğ½ºÅ©°¡ ´õ ÀÛÀº µğ½ºÅ©À§¿¡ ¿Ã¶ó°¨
+    else if (Tower[to - 1].size() > 0                                //í° ë””ìŠ¤í¬ê°€ ë” ì‘ì€ ë””ìŠ¤í¬ìœ„ì— ì˜¬ë¼ê°
         &&
         Tower[from - 1][Tower[from - 1].size() - 1] > Tower[to - 1][Tower[to - 1].size() - 1])
         return 0;
@@ -31,7 +31,7 @@ string Decide()
 {
     string decision = " ";
 
-    while (true) { //Àç½ÃÀÛ ¿©ºÎ È®ÀÎ, ÀÚµ¿ Ç®ÀÌ °áÁ¤
+    while (true) { //ì¬ì‹œì‘ ì—¬ë¶€ í™•ì¸, ìë™ í’€ì´ ê²°ì •
         cin >> decision;
         if (decision != "Y" && decision != "N")
             cout << "This is an invalid answer. Please input again : ";
@@ -49,7 +49,7 @@ void Sloveautohanoi(int disk, int from, int temp, int to) {
         Sloveautohanoi(disk - 1, temp, from, to);
     }
 }
-void PrintTower(vector<vector<int>> Tower) //Å¸¿ö ÇöÈ² Ãâ·Â
+void PrintTower(vector<vector<int>> Tower) //íƒ€ì›Œ í˜„í™© ì¶œë ¥
 {
     int sizeofTower = Tower.size();
 
@@ -64,12 +64,12 @@ void PrintTower(vector<vector<int>> Tower) //Å¸¿ö ÇöÈ² Ãâ·Â
         cout << '\n';
     }
 }
-void MoveDisk(vector<vector<int>>& Tower, int from, int to) //µğ½ºÅ©ÀÌµ¿ ÇÔ¼ö
+void MoveDisk(vector<vector<int>>& Tower, int from, int to) //ë””ìŠ¤í¬ì´ë™ í•¨ìˆ˜
 {
     Tower[to - 1].push_back(Tower[from - 1][Tower[from - 1].size() - 1]);
     Tower[from - 1].pop_back();
 }
-void ReEntermove(int& from, int& to) //´Ù½Ã ÀÔ·Â
+void ReEntermove(int& from, int& to) //ë‹¤ì‹œ ì…ë ¥
 {
     while (!cin)
     {
@@ -80,7 +80,7 @@ void ReEntermove(int& from, int& to) //´Ù½Ã ÀÔ·Â
         cin >> from >> to;
     }
 }
-void ReEnterdisk(int& disk) //´Ù½Ã ÀÔ·Â
+void ReEnterdisk(int& disk) //ë‹¤ì‹œ ì…ë ¥
 {
     while (!cin || disk < 3)
     {
@@ -93,11 +93,11 @@ void ReEnterdisk(int& disk) //´Ù½Ã ÀÔ·Â
 }
 
 int main() {
-    while (true) { //°ÔÀÓ ½ÃÀÛ
+    while (true) { //ê²Œì„ ì‹œì‘
         vector<vector<int>> HanoiTower = {};
-        vector<int> first_tower;             //°ÔÀÓ Á¾·á Á¶°Ç È®ÀÎÀ» À§ÇÑ Ã¹ ¹øÂ° Å¾
-        int number_of_disk = 0;              //¿øÆÇÀÇ °³¼ö
-        int movecount = 1;                   //ÀÌµ¿ È½¼ö
+        vector<int> first_tower;             //ê²Œì„ ì¢…ë£Œ ì¡°ê±´ í™•ì¸ì„ ìœ„í•œ ì²« ë²ˆì§¸ íƒ‘
+        int number_of_disk = 0;              //ì›íŒì˜ ê°œìˆ˜
+        int movecount = 1;                   //ì´ë™ íšŸìˆ˜
 
         cout << "Please select the number of disks(3 or more) : ";
 
@@ -110,7 +110,7 @@ int main() {
         first_tower = HanoiTower[0];
         PrintTower(HanoiTower);
 
-        //ÀÚµ¿ Ç®ÀÌ ÀÇ»ç °áÁ¤¡é
+        //ìë™ í’€ì´ ì˜ì‚¬ ê²°ì •â†“
         cout << "Would you like to slove it automatically? If ""Y"", the program will be terminated. (Y/N) : ";                
         if (Decide() == "Y") {
             PrintTower(HanoiTower);
@@ -119,12 +119,12 @@ int main() {
             break;
         }
 
-        while (true) { //¿øÆÇ ÀÌµ¿
+        while (true) { //ì›íŒ ì´ë™
             int size_of_Hanoi = HanoiTower.size();
-            int from = 0, to = 0;                   //¿Å±æ ±âµÕ ¼ıÀÚ, ³õÀ» ±âµÕ ¼ıÀÚ 
-            int movecheck = 0;                      //¿øÆÇ ÀÌµ¿ °¡´É ¿©ºÎ ÆÇ´Ü º¯¼ö
+            int from = 0, to = 0;                   //ì˜®ê¸¸ ê¸°ë‘¥ ìˆ«ì, ë†“ì„ ê¸°ë‘¥ ìˆ«ì 
+            int movecheck = 0;                      //ì›íŒ ì´ë™ ê°€ëŠ¥ ì—¬ë¶€ íŒë‹¨ ë³€ìˆ˜
 
-            //°ÔÀÓ Á¾·á Á¶°Ç È®ÀÎ ¡é
+            //ê²Œì„ ì¢…ë£Œ ì¡°ê±´ í™•ì¸ â†“
             if (first_tower == HanoiTower[2]) {
                 cout << "Congratulation! You Slove it in "
                     << movecount - 1 << " times!" << '\n';
@@ -148,13 +148,13 @@ int main() {
 
             movecheck = Allowmove(from, to, size_of_Hanoi, HanoiTower);
 
-            if (movecheck == 1) {                                   //ÀÌµ¿°¡´É
+            if (movecheck == 1) {                                   //ì´ë™ê°€ëŠ¥
                 MoveDisk(HanoiTower, from, to);
                 cout << '\n' << "---Move succeeded !---" << "\n\n";
                 PrintTower(HanoiTower);
                 movecount++;
             }
-            else cout << '\n' << "---Move failed !---" << '\n';     //ÀÌµ¿ºÒ°¡
+            else cout << '\n' << "---Move failed !---" << '\n';     //ì´ë™ë¶ˆê°€
 
             cout << '\n';
         }
